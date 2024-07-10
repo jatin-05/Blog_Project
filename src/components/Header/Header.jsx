@@ -43,9 +43,9 @@ function Header() {
         <nav className='flex'>
 
           <div className='mr-4'>
-            <link to='/'>
+            <Link to='/'>
               <Logo />
-            </link>
+            </Link>
           </div>
 
           <ul className='flex ml-auto'>
@@ -53,8 +53,8 @@ function Header() {
               navItems.map((obj)=>
               obj.active ? (
               <li key={obj.name}>
-                <button onClick={()=> navigate(item.slug)} className='px-6 py-2 '>
-                    obj.name
+                <button onClick={()=> navigate(obj.slug)} className='px-6 py-2 '>
+                    {obj.name}
                 </button>
               </li>
               ): null

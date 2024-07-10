@@ -97,7 +97,7 @@ export class Service  {
     // }
 
 
-    async getAllPosta(/*querries = [Query.equal("status", "active")]*/){
+    async getAllPosts(/*querries = [Query.equal("status", "active")]*/){
       try {
         return await this.databases.listDocuments(
           config.appwriteDatabaseId,
