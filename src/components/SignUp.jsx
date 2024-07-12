@@ -34,8 +34,8 @@ function SignUp() {
 
 
   return (
-    <div className='flex items-center justify-center'>
-        <div className='mx-auto max-w-lgrounded-xl p-10 border-black/10 bg-gray-100'>  
+    <div className='w-full flex items-center justify-center h-auto '>
+        <div className='mx-auto w-full max-w-lg bg-white text-black rounded-xl border border-black/10'>  
             <div className='mb-3 flex justify-center'>
                     <span>
                     <Logo/>
@@ -43,16 +43,16 @@ function SignUp() {
                 </div>
             <h2 className='text-center text-2xl font-bold'>Sign up to create Account</h2>
 
-            <p className='mt-2 text-base text-center '> 
+            <p className='my-2 mb-4 text-base text-center '> 
                 already have an account? 
-                <link to='/login ' className='font-medium hover:underline'>
+                <Link to='/login' className='font-medium hover:underline'>
                    Login 
-                </link>
+                </Link>
             </p>
             {error && <p className='text-red-600 mt-8 text-center'>{error}</p>}
 
             <form onSubmit={handleSubmit(create)}>
-                <div>
+                <div className='space-y-3 '>
                 <Input 
                     label="Full Name"
                     type="text"
@@ -80,9 +80,11 @@ function SignUp() {
                         required:true
                     })}
                     />
-                    <Button type="submit">
+                    <div className='flex justify-center mb-2'>
+                    <Button type="submit" className='rounded-lg border mb-2'>
                         Sign Up
                     </Button>
+                    </div>
                 </div>
             </form>
         </div>

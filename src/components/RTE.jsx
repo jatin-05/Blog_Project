@@ -7,11 +7,12 @@ function RTE({name, control,label, defaultValue=''}) {
     <div>
         {label && <label className='mb-1 pl-1' htmlFor="">{label}</label>}
 
-        <controller
-        name={name || 'context'}
+        <Controller
+        name={name || 'content'}
         control={control}
         render={ ({field: {onChange}})=>(
             <Editor
+            apiKey='irj8xhsth79k9rd98w2da0j56wdktj3cu7dbsymcr40gcthr'
             initialValue={defaultValue}
             init={{
                 initialValue:defaultValue,
@@ -19,31 +20,33 @@ function RTE({name, control,label, defaultValue=''}) {
                 heigth:500,
                 menubar:true,
                 plugins: [
-                    "image",
-                    "advlist",
-                    "autolink",
-                    "lists",
-                    "link",
-                    "image",
-                    "charmap",
-                    "preview",
-                    "anchor",
-                    "searchreplace",
-                    "visualblocks",
-                    "code",
-                    "fullscreen",
-                    "insertdatetime",
-                    "media",
-                    "table",
-                    "code",
-                    "help",
-                    "wordcount",
-                    "anchor",
-                  ],
-                  toolbar: "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
-                  content
-
-            }}
+                "image",
+                "advlist",
+                "autolink",
+                "lists",
+                "link",
+                "image",
+                "charmap",
+                "preview",
+                "anchor",
+                "searchreplace",
+                "visualblocks",
+                "code",
+                "fullscreen",
+                "insertdatetime",
+                "media",
+                "table",
+                "code",
+                "help",
+                "wordcount",
+                "anchor",
+            ],
+            toolbar:
+            "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+        }}
+                  
+            
             onEditorChange={onChange}
             />
         )}

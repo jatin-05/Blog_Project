@@ -9,25 +9,25 @@ import { useSelector } from 'react-redux'
 function PostForm({post}) {
     const {register, handleSubmit,watch, setValue, control, getValues } = useForm({
         defaultValues: {
-            titile :post?.title || '',
-            slug: post?.slug || '',
+            title :post?.title || '',
+            slug: post?.$id || '',
             content : post?.content || '',
             status : post?.status || 'active',
         }
     })
 
     const navigate = useNavigate()
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(state => state.auth.userData)
 
     const submit = async (data) => {
         if (post){
-           const file=  data.image[0]? service.uploadFile(data.image[0]) : null
+           const file=  data.image[0]? await service.uploadFile(data.image[0]) : null
            if(file){
                service.deleteFile(post.featuredImage)
            }
            const dbPost= await service.updatePost(post.$id, {
             ...data,
-            featiredImage: file? file.$id : undefined,
+            featuredImage: file? file.$id : undefined,
             })
             
             if (dbPost){
@@ -38,8 +38,9 @@ function PostForm({post}) {
             const file = await service.uploadFile(data.image[0])
 
             if (file){
-                const fileId =  file.$id
-                data.featuredImage= fileId
+                const fileId =  file.$id;
+                console.log("fileid", fileId)
+                data.featuredImage= fileId;
                 const dbPost = await service.createPost({
                     ...data,
                     userId:userData.$id,
@@ -56,7 +57,7 @@ function PostForm({post}) {
             return value
                 .trim()
                 .toLowerCase()
-                .replace(/^[a-zA-Z\d\s]+/g, '-')
+                .replace(/[^a-zA-Z\d\s]+/g, '-')
                 .replace(/\s/g, '-')
         }
         return ''
@@ -65,7 +66,7 @@ function PostForm({post}) {
     useEffect(() => {
       const subscription = watch((value , {name})=> {
         if (name==='title'){
-            setValue('slug' , slugTransform(value.titile, {shouldValidate: true}))
+            setValue('slug' , slugTransform(value.title), {shouldValidate: true})
         }
       })
 
@@ -76,8 +77,8 @@ function PostForm({post}) {
     
 
   return (
-    <form onSubmit={handleSubmit(submit)}className='flex flex-wrap'>
-        <div className='w-2/3'>
+    <form onSubmit={handleSubmit(submit)}className=' flex flex-wrap justfy-between'>
+        <div className='w-2/3 border-r pr-4 '>
             <Input
                 label="Title"
                 placeholder='Write Title Here'
@@ -104,8 +105,9 @@ function PostForm({post}) {
                 defaultValue={getValues('content')}
             />
         </div>
+        <div className='w-1/3 pl-4'>
              <Input
-                label="Featured Imsge"
+                label="Featured Image"
                 type='file'
                 className='mb-4'
                 accept="image/png, image/jpg ,image/jpeg, image/gif"
@@ -115,7 +117,7 @@ function PostForm({post}) {
             />
             {post && (
                 <div className='w-full mb-4'>
-                    <img src={service.getFilePreview(post.featiredImage)} alt="post.title" className='rounded-lg' />
+                    <img src={service.getFilePreview(post.featuredImage)} alt="post.title" className='rounded-lg' />
                 </div>
             )}
 
@@ -132,7 +134,6 @@ function PostForm({post}) {
             >
                 {post ? "update" : "submit"}
             </Button>
-        <div className='w-1/3'>
                 
         </div>
     </form>

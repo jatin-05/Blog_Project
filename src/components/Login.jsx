@@ -9,8 +9,8 @@ import { useForm } from 'react-hook-form'
 
 
 function Login() {
-    dispatch = useDispatch()
-    navigate= useNavigate()
+    const dispatch = useDispatch()
+    const navigate= useNavigate()
     const {register , handleSubmit} = useForm()
     const [error, setError] = useState("")
 
@@ -20,10 +20,11 @@ function Login() {
             const session = await authService.login(data)
             if(session){
                 const userData = await authService.getCurrentUser()
+                console.log(userData)
                 if(userData){
-                    dispatch(storeLogin(userData))
-                    navigate("/node_modules")
-                }
+                    dispatch(storeLogin(userData))}
+                    navigate("/")
+                
             }
         } catch (error) {
             setError(error.message)
@@ -31,8 +32,8 @@ function Login() {
     }
   return (
     <div
-    className='flex justify-center items-center w-full'>
-        <div className='mx-auto w-full max-w-lg bg-gray-100 rounded-xl border border-black/10'>
+    className='flex justify-center items-center w-full h-auto'>
+        <div className='mx-auto w-full max-w-lg bg-white text-black rounded-xl border border-black/10'>
             <div className='mb-3 flex justify-center'>
                 <span>
                   <Logo/>
@@ -42,17 +43,20 @@ function Login() {
 
             <p className='mt-2 text-base text-center '> 
                 dont have an account? 
-                <link to='/signup ' className='font-medium hover:underline'>
+                <Link to='/signup' className='font-medium hover:underline'>
                   Sign Up 
-                </link>
+                </Link>
             </p>
             {error && <p className='text-red-600 mt-8  text-center'>{error}</p>}
 
             <form onSubmit={handleSubmit(login) } className='mt-8'>
-                <div className='space-y-5'>
+                <div className='space-y-5 '>
+                   
+
                     <Input 
                     label="email"
                     type="email"
+                    
                     placeholder="Email Comes Here"
                     {...register('email', {
                         required:true,
@@ -61,16 +65,20 @@ function Login() {
                         }
                     }  )} 
                     />
+                    
 
                     <Input
                     label="password"
                     type="password"
+                
                     placeholder="password Here"
                     {...register("password" , {
                          required: true,   
                     })}/>
+                    <div className='flex justify-center'>
+                    <Button type='submit' className='w-full border mb-2'>Sign In</Button>
 
-                    <Button type='submit' className='w-full'>Sign In</Button>
+                    </div>
                 </div>
             </form>
         </div>

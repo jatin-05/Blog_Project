@@ -6,7 +6,7 @@ function Select({
     className='',
     ...props 
 } ,ref) {
-    const id=useId
+    const id=useId()
   return (
     <div className={`w-full `}>
      {label && <label  htmlFor='id'></label>}
@@ -16,7 +16,7 @@ function Select({
      {...props}
       id={id}
       ref={ref}>
-        {options?.map((val)=> (<options value={val} key={val}>{val}</options>))}
+        {options?.map((val)=> (<option value={val} key={val}>{val}</option>))}
       </select>
     </div>
   )
