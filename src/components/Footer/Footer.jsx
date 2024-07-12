@@ -11,7 +11,7 @@ function Footer() {
                       <div className="w-full p-6 md:w-1/2 lg:w-5/12">
                           <div className="flex h-full flex-col justify-between">
                               <div className="mb-4 inline-flex items-center">
-                                  <Logo  img='white-Logo.png' />
+                                <img src="/logo/white-Logo.png" alt="logo" className='size-12' /> 
                               </div>
                               <div>
                                   <p className="text-sm text-gray-600">
