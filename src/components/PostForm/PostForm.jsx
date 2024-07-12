@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {Button, Input, Logo, Select,RTE} from '../index'
 import service from '../../appwrite/appwriteConfig'
@@ -15,11 +15,12 @@ function PostForm({post}) {
             status : post?.status || 'active',
         }
     })
-
+    const [error, setError] = useState("")
     const navigate = useNavigate()
     const userData = useSelector(state => state.auth.userData)
 
     const submit = async (data) => {
+        setError('')
         if (post){
            const file=  data.image[0]? await service.uploadFile(data.image[0]) : null
            if(file){
@@ -41,13 +42,23 @@ function PostForm({post}) {
                 const fileId =  file.$id;
                 console.log("fileid", fileId)
                 data.featuredImage= fileId;
-                const dbPost = await service.createPost({
+                try {const dbPost = await service.createPost({
                     ...data,
                     userId:userData.$id,
+                }).catch((error)=> {
+                    // console.log(error.message);
+                    // setError(error.message)  
+                    // console.log(error)  
                 })
+
                 if(dbPost){
                     navigate(`/post/${dbPost.$id}`)
                 }
+            } catch (error){
+                console.log(error.message);
+                    setError(error.message)  
+                    console.log(error) 
+            }
             }
         }
     }
@@ -78,6 +89,7 @@ function PostForm({post}) {
 
   return (
     <form onSubmit={handleSubmit(submit)}className=' flex flex-wrap justfy-between'>
+        {error &&  <div>{error}</div>}
         <div className='w-2/3 border-r pr-4 '>
             <Input
                 label="Title"
@@ -124,13 +136,13 @@ function PostForm({post}) {
             <Select
                 options={['active', 'inactive']}
                 label='Status'
-                className="mb-4"
+                className="mb-4 border"
                 {...register('status', { required:true })}
             />   
 
             <Button
                 type='submit'
-                className='w-full'
+                className='w-full border'
             >
                 {post ? "update" : "submit"}
             </Button>

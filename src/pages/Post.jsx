@@ -38,15 +38,17 @@ function Post() {
                 <h1 className='text-5xl font-bold text-center'>{post.title}</h1>
                 <div className='w-full flex justify-center relative rounded-xl p-2'>
                 
-                    <img src={service.getFilePreview(post.featuredImage)} alt={post.title} className='rounded-xl'/>
+                    <img src={service.getFilePreview(post.featuredImage)} alt={post.title} className=' mt-4 rounded-xl' 
+                     style={{width:325}}
+                    />
                     </div>
 
                     {isAuthor && (  
                         <div className='absolute right-6 top-6'>
                             <Link to={`/edit-post/${post.$id}  `}>
-                                <Button bgColor='bg-green-500' className='mr-3'>Edit</Button>
+                                <Button bgColor='' className='bg-green-500 mr-3'>Edit</Button>
                             </Link>
-                            <Button bgColor='bg-red-500' onClick={()=>{
+                            <Button bgColor='' className="bg-red-500" onClick={()=>{
 
                                 
                                 if (confirm('Are you Sure You want to delete the post'))
