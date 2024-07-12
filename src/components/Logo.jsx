@@ -5,7 +5,7 @@ function Logo({
 }) {
   
   return (
-    <div><img src='/logo/logo-design_6415824.png' className=' size-12' alt="" /></div>
+    <div><img src={`/public/logo/${img}`} className=' size-12' alt="" /></div>
   )
 }
 
