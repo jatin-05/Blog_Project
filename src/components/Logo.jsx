@@ -1,8 +1,11 @@
 import React from 'react'
 
-function Logo() {
+function Logo({
+  img='logo-design_6415824.png'
+}) {
+  
   return (
-    <div>Logo</div>
+    <div><img src={`/logo/${img}`} className=' size-12' alt="" /></div>
   )
 }
 

@@ -35,7 +35,7 @@ function Login() {
     className='flex justify-center items-center w-full h-auto'>
         <div className='mx-auto w-full max-w-lg bg-white text-black rounded-xl border border-black/10'>
             <div className='mb-3 flex justify-center'>
-                <span>
+                <span className='mt-2'>
                   <Logo/>
                 </span>
             </div>

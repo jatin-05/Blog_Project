@@ -15,7 +15,7 @@ function Home() {
 
     if (posts.length === 0) {
         return <Container>
-          <div className='text-center'>
+          <div className='text-center text-lg pt-4 ' style={{height:205}}>
 
             No Posts Found || Login to Read Posts   
           </div>
@@ -37,6 +37,7 @@ function Home() {
                   </div>
           </Container>
       </div>
+      // <AllPosts/>
     )
   }
 

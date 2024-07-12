@@ -38,17 +38,17 @@ function Header() {
     },
   ]
   return (
-    <header className='py-3 bg-gray-500'>
+    <header className='py-3 bg-black'>
       <Container>
         <nav className='flex'>
 
           <div className='mr-4'>
             <Link to='/'>
-              <Logo />
+              <Logo img='white-Logo.png'  />
             </Link>
           </div>
 
-          <ul className='flex ml-auto'>
+          <ul className='flex ml-auto text-white'>
             {
               navItems.map((obj)=>
               obj.active ? (
